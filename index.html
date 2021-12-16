@@ -15,6 +15,8 @@
     <input type="button" class="btn" id="next_button" value="next" onclick="nextButton();"/>
     <input type="text" class="text" id="time_text" value="5" maxlength="3" size="3"/>
     <input type="button" class="btn" id="quality_button" value="quality" onclick="qualityButton();"/>
+    <!-- <input type="text" class="text" id="videoId_text" value="n_zPBS0Qcmk" maxlength="11" size="11"/> -->
+    <!-- <input type="button" class="btn" id="videoId_button" value="ok" onclick="vIdButton();"/> -->
     <div id="player"></div>
 
     <script>
@@ -30,12 +32,14 @@
       var player;
       var windowWidth = window.innerWidth;
       var windowHeight = window.innerHeight-50;
+      var v_id = document.getElementById('videoId_text').value;
       function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
           height: windowHeight,
           width: windowWidth,
-          videoId: 'M7lc1UVf-VE',
-          // videoId: 'sDeHRYT_vGM',
+          videoId: v_id,
+          // videoId: "M7lc1UVf-VE",
+          videoId: 'sDeHRYT_vGM',
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange,
@@ -45,7 +49,7 @@
       }
 
       function onPlayerPlaybackQualityChange(event) {
-          event.target.setPlaybackQuality(suggestedQuality="small")
+          event.target.setPlaybackQuality(suggestedQuality="hd1080")
           console.log(player.getPlaybackQuality())
       }
 
@@ -79,14 +83,18 @@
           player.pauseVideo();
       }
       function previousButton() {
-        var space = document.getElementById('time_text').value;
+        var space = document.getElementById('time_text').value*1;
         var time = player.getCurrentTime()-space;
         player.seekTo(seconds=time)
       }
       function nextButton() {
-        var space = document.getElementById('time_text').value;
+        var space = document.getElementById('time_text').value*1;
         var time = player.getCurrentTime()+space;
         player.seekTo(seconds=time)
+      }
+      function vIdButton() {
+        var v_id = document.getElementById('videoId_text').value;
+        player.loadVideoById(videoId=v_id, startSeconds="0", suggestedQuality="highres");
       }
     </script>
   </body>
