@@ -35,6 +35,7 @@
       var v_id = document.getElementById('videoId_text').value;
       function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
+          disablekb: 1,
           height: windowHeight,
           width: windowWidth,
           videoId: v_id,
