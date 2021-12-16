@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <style>
+      .btn:hover {
+        background: gray;
+      }
+    </style>
+  </head>
   <body topmargin="0" leftmargin="0" marginwidht="0" marginheight="0">
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div id="player"></div>
-    <input type="button" id="play_button" value="play" onclick="playButton();"/>
-    <input type="button" id="pause_button" value="pause" onclick="pauseButton();"/>
-    <input type="button" id="previous_button" value="previous" onclick="previousButton();"/>
-    <input type="button" id="next_button" value="next" onclick="nextButton();"/>
-    <input type="button" id="quality_button" value="quality" onclick="qualityButton();"/>
+    <input type="button" class="btn" id="play_button" value="play" onclick="playButton();"/>
+    <input type="button" class="btn" id="pause_button" value="pause" onclick="pauseButton();"/>
+    <input type="button" class="btn" id="previous_button" value="previous" onclick="previousButton();"/>
+    <input type="button" class="btn" id="next_button" value="next" onclick="nextButton();"/>
+    <input type="button" class="btn" id="quality_button" value="quality" onclick="qualityButton();"/>
 
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
@@ -51,13 +58,13 @@
       //    the player should play for six seconds and then stop.
       var done = false;
       function onPlayerStateChange(event) {
-        player.setPlaybackQuality(suggestedQuality="small")
-        console.log(player.getPlaybackQuality())
-        if (event.data == YT.PlayerState.PLAYING && !done) {
-          setTimeout(stopVideo, 6000);
-          // done = true;
-          done = false;
-        }
+        // player.setPlaybackQuality(suggestedQuality="small")
+        // console.log(player.getPlaybackQuality())
+
+        // if (event.data == YT.PlayerState.PLAYING && !done) {
+        //   setTimeout(stopVideo, 6000);
+        //   done = true;
+        // }
       }
       function stopVideo() {
         player.stopVideo();
