@@ -84,7 +84,8 @@
         player.seekTo(seconds=time)
       }
       function nextButton() {
-        var time = player.getCurrentTime()+10;
+        var space = document.getElementById('time_text').value;
+        var time = player.getCurrentTime()+space;
         player.seekTo(seconds=time)
       }
     </script>
