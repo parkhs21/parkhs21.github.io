@@ -10,7 +10,7 @@
       }
     </style>
   </head>
-  <body topmargin="0" leftmargin="0" marginwidht="0" marginheight="0">
+  <body topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <input type="button" class="btn" id="play_button" value="play" onclick="playButton();"/>
     <input type="button" class="btn" id="pause_button" value="pause" onclick="pauseButton();"/>
@@ -35,8 +35,8 @@
       var player;
       // var windowWidth = window.innerWidth;
       // var windowHeight = window.innerHeight-50;
-      var windowWidth = 1280;
-      var windowHeight = 720;
+      var windowWidth = window.innerWidth;
+      var windowHeight = windowWidth/16*9;
       var v_id = document.getElementById('videoId_text').value;
       function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
