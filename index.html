@@ -9,12 +9,13 @@
   </head>
   <body topmargin="0" leftmargin="0" marginwidht="0" marginheight="0">
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-    <div id="player"></div>
     <input type="button" class="btn" id="play_button" value="play" onclick="playButton();"/>
     <input type="button" class="btn" id="pause_button" value="pause" onclick="pauseButton();"/>
     <input type="button" class="btn" id="previous_button" value="previous" onclick="previousButton();"/>
     <input type="button" class="btn" id="next_button" value="next" onclick="nextButton();"/>
+    <input type="text" class="text" id="time_text" value="5"/>
     <input type="button" class="btn" id="quality_button" value="quality" onclick="qualityButton();"/>
+    <div id="player"></div>
 
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
@@ -78,12 +79,13 @@
           player.pauseVideo();
       }
       function previousButton() {
-          var time = player.getCurrentTime()-10;
-          player.seekTo(seconds=time)
+        var space = document.getElementById('time_text').value;
+        var time = player.getCurrentTime()-space;
+        player.seekTo(seconds=time)
       }
       function nextButton() {
-          var time = player.getCurrentTime()+10;
-          player.seekTo(seconds=time)
+        var time = player.getCurrentTime()+10;
+        player.seekTo(seconds=time)
       }
     </script>
   </body>
