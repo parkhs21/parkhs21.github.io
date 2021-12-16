@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .btn:hover {
+        background: white;
+      }
+    </style>
+  </head>
+  <body topmargin="0" leftmargin="0" marginwidht="0" marginheight="0">
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <input type="button" class="btn" id="play_button" value="play" onclick="playButton();"/>
+    <input type="button" class="btn" id="pause_button" value="pause" onclick="pauseButton();"/>
+    <input type="button" class="btn" id="previous_button" value="previous" onclick="previousButton();"/>
+    <input type="button" class="btn" id="next_button" value="next" onclick="nextButton();"/>
+    <input type="text" class="text" id="time_text" value="5" maxlength="3" size="3"/>
+    <!-- <input type="button" class="btn" id="quality_button" value="quality" onclick="qualityButton();"/> -->
+    <!-- <input type="text" class="text" id="videoId_text" value="n_zPBS0Qcmk" maxlength="11" size="11"/> -->
+    <!-- <input type="button" class="btn" id="videoId_button" value="ok" onclick="vIdButton();"/> -->
+    <div id="player"></div>
+
+    <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      var windowWidth = window.innerWidth;
+      var windowHeight = window.innerHeight-50;
+      var v_id = document.getElementById('videoId_text').value;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          disablekb: 1,
+          height: windowHeight,
+          width: windowWidth,
+          videoId: v_id,
+          // videoId: "M7lc1UVf-VE",
+          videoId: 'sDeHRYT_vGM',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange,
+            'onPlaybackQualityChange': onPlayerPlaybackQualityChange
+          }
+        });
+      }
+
+      function onPlayerPlaybackQualityChange(event) {
+          event.target.setPlaybackQuality(suggestedQuality="hd1080")
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
+      function onPlayerStateChange(event) {
+        // player.setPlaybackQuality(suggestedQuality="small")
+        // console.log(player.getPlaybackQuality())
+
+        // if (event.data == YT.PlayerState.PLAYING && !done) {
+        //   setTimeout(stopVideo, 6000);
+        //   done = true;
+        // }
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }
+
+
+      function playButton() {
+          player.playVideo();
+      }
+      function pauseButton() {
+          player.pauseVideo();
+      }
+      function previousButton() {
+        var space = document.getElementById('time_text').value*1;
+        var time = player.getCurrentTime()-space;
+        player.seekTo(seconds=time)
+      }
+      function nextButton() {
+        var space = document.getElementById('time_text').value*1;
+        var time = player.getCurrentTime()+space;
+        player.seekTo(seconds=time)
+      }
+      function vIdButton() {
+        var v_id = document.getElementById('videoId_text').value;
+        player.loadVideoById(videoId=v_id, startSeconds="0", suggestedQuality="highres");
+      }
+    </script>
+  </body>
+</html>
